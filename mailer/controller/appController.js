@@ -56,25 +56,24 @@ const getbill = (req, res)=>{
     let MailGenerator = new Mailgen({
         theme: "default",
         product : {
-            name: "Mailgen",
+            name: "nplcodes",
             link : 'https://mailgen.js/'
         }
     })
 
     let response = {
         body: {
-            name : "Daily Tuition",
-            intro: "Your bill has arrived!",
+            name : "Leon",
+            intro: "Your Account have been created, copy the code to verify your account!",
             table : {
                 data : [
                     {
-                        item : "Nodemailer Stack Book",
-                        description: "A Backend application",
-                        price : "$10.99",
+                        code : 13324,
+                        description: "Verification code",
                     }
                 ]
             },
-            outro: "Looking forward to do more business"
+            outro: "Looking forward!"
         }
     }
 
@@ -83,13 +82,13 @@ const getbill = (req, res)=>{
     let message = {
         from : EMAIL,
         to : userEmail,
-        subject: "Place Order",
+        subject: "Comfirm registration",
         html: mail
     }
 
     transporter.sendMail(message).then(() => {
         return res.status(201).json({
-            msg: "you should receive an email"
+            msg: "email sent!"
         })
     }).catch(error => {
         return res.status(500).json({ error })
